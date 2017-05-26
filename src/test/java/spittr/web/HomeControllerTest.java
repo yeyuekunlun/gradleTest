@@ -18,7 +18,7 @@ public class HomeControllerTest {
     re.setPrefix("/WEB-INF/views/");
     re.setSuffix("jsp");
     MockMvc mockMvc = standaloneSetup(controller).build();
-    mockMvc.perform(get("/home"))
+    mockMvc.perform(get("/"))
            .andExpect(view().name("home"));
   }
 
