@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
+import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 
@@ -37,6 +38,19 @@ public class SpittleControllerTest {
        .andExpect(model().attribute("spittleList", 
                   hasItems(expectedSpittles.toArray())));
        ;
+  }
+  
+  @Test
+  public void testFindOneSpittle() throws Exception {
+	  SpittleRepository spittleRepository = mock(SpittleRepository.class);
+	  SpittleController con = new SpittleController(spittleRepository);
+	  Spittle spittle = createSpittleList(4).get(3);
+	  when(spittleRepository.findOneSpittles(3)).thenReturn(spittle);
+	  MockMvc mockMvc = standaloneSetup(con).build();
+	  mockMvc.perform(get("/spittles/3")).andExpect(view().name("spittles/3"))
+	  .andExpect(model().attributeExists("spittle"))
+	  .andExpect(model().attribute("spittle", spittle))
+	  ;
   }
 
   

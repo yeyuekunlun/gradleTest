@@ -24,4 +24,11 @@ public class SpittleRepositoryX implements SpittleRepository {
 		}
 		return spittles;
 	}
+
+	@Override
+	public Spittle findOneSpittles(int i) {
+		// TODO Auto-generated method stub
+		List<Spittle> createSpittleList = createSpittleList(i+1);
+		return createSpittleList.get(i);
+	}
 }
